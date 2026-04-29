@@ -80,7 +80,7 @@
 
         <label>What team is this event for?</label>
         <select id="input-color" oninput="generateTemplate()">
-            <option value="#00abab">Careers</option>
+            <option value="#00abab">Careers & Employability</option>
             <option value="#9e1a7d">Counselling & Mental Health</option>
             <option value="#538c12">Disability & Dyslexia</option>
             <option value="#538c12">firstpoint</option>
@@ -92,9 +92,7 @@
         <label>Event Title *</label>
         <input type="text" id="input-title" value="Event title" oninput="generateTemplate()">
 
-        <label>Event Subheading (Optional)</label>
-        <input type="text" id="input-tagline" value="Optional subheading" oninput="generateTemplate()">
-
+        
         <label>Date & Time (Optional)</label>
 <div class="hint">Format: MMM, DD 2026 | HH:MM AM/PM - HH:MM AM/PM </div>
         <input type="text" id="input-when" value="MAR 24, 2026 | 1:00 PM - 3:00 PM" oninput="generateTemplate()">
@@ -122,11 +120,16 @@ This is placeholder text intended to be replaced with event content. It does not
             <input type="text" id="input-s3-desc" value="Use these boxes to spotlight the most important or appealing aspects of the event for students." oninput="generateTemplate()">
         </div>
       
- 
+  <label>Button (Optional)</label>
+<div class="hint">Use if needing link outside of targetconnect, e.g. if signposting to external event.</div>
+        <div class="feature-box">
+            <input type="text" id="input-button-text" value="Call to action, e.g. Click here to find out more" style="margin-bottom: 5px;" oninput="generateTemplate()">
+            <input type="text" id="input-button-link" value="Link, e.g. https://www.worc.ac.uk/" oninput="generateTemplate()">
+        </div>
             
      
       
-           <label>FAQs (Optional)</label>
+           <label>Frequently Asked Questions (Optional)</label>
         <div class="feature-box">
             <input type="text" id="input-f1-title" value="Question" style="margin-bottom: 5px;" oninput="generateTemplate()">
             <input type="text" id="input-f1-desc" value="Answer" oninput="generateTemplate()">
@@ -171,7 +174,7 @@ This is placeholder text intended to be replaced with event content. It does not
         
         <div id="live-preview" style="flex-grow: 1; border: 1px dashed #cbd5e1; padding: 20px; border-radius: 8px; background: #fff; overflow-y: auto; max-height: 800px;"></div>
 
-        <label>Generated Code (Copy this into TargetConnect)</label>
+        <label>Generated Code (Copy this into targetconnect)</label>
         <textarea id="code-output" readonly></textarea>
     </div>
 
@@ -179,10 +182,10 @@ This is placeholder text intended to be replaced with event content. It does not
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">✖</span>
             <h2 style="border-bottom: none; padding-bottom: 0;">How to add this to your event</h2>
-            <p class="instruction-step"><strong>1.</strong> In the About Section of TargetConnect, click this icon in the Long Description's toolbox to open code view.</p>
-            <img src="https://i.ibb.co/pS1WzXh/tc-event-html-codeicon.png" alt="Code view icon in TargetConnect" class="instruction-img">
+            <p class="instruction-step"><strong>1.</strong> In the About Section of an event on targetconnect, click this icon in the Long Description's toolbox to open code view.</p>
+            <img src="https://i.ibb.co/pS1WzXh/tc-event-html-codeicon.png" alt="Code view icon in targetconnect" class="instruction-img">
             <p class="instruction-step"><strong>2.</strong> Replace anything here with the code provided by the builder.</p>
-            <img src="https://i.ibb.co/N25tSyBf/tc-event-html-codeview.png" alt="Code view text area in TargetConnect" class="instruction-img">
+            <img src="https://i.ibb.co/N25tSyBf/tc-event-html-codeview.png" alt="Code view text area in targetconnect" class="instruction-img">
             <div style="background: #eef2ff; border-left: 4px solid #4f46e5; padding: 12px; border-radius: 4px; margin-top: 15px; color: #312e81; font-size: 0.95rem;">
                 <strong>💡 Tip:</strong> You can click the code icon again to preview exactly how the template will look!
             </div>
@@ -208,7 +211,7 @@ This is placeholder text intended to be replaced with event content. It does not
             
             const color = document.getElementById('input-color').value;
             const title = document.getElementById('input-title').value || 'Your Event Title';
-            const tagline = document.getElementById('input-tagline').value;
+           
             const when = document.getElementById('input-when').value;
             const where = document.getElementById('input-where').value;
             const desc = document.getElementById('input-desc').value.replace(/\n/g, '<br><br>'); 
@@ -218,7 +221,8 @@ const s1Desc = document.getElementById('input-s1-desc').value;
 const s2Desc = document.getElementById('input-s2-desc').value;
             const s3Title = document.getElementById('input-s3-title').value;
 const s3Desc = document.getElementById('input-s3-desc').value;
-            
+            const butText = document.getElementById('input-button-text').value;
+const butLink = document.getElementById('input-button-link').value;
             const f1Title = document.getElementById('input-f1-title').value;
             const f1Desc = document.getElementById('input-f1-desc').value;
             const f2Title = document.getElementById('input-f2-title').value;
@@ -241,8 +245,7 @@ const f7Title = document.getElementById('input-f7-title').value;
             // TEMPLATE 
             // ------------------------------------------
             {
-                let taglineHtml = tagline ? `<div style="color: ${color}; font-weight: bold; font-size: 1.1rem; margin-top: 5px;">${tagline}</div>` : '';
-                let detailsHtml = (when || where) ? `
+                                let detailsHtml = (when || where) ? `
                     <div style="background: #f8fafc; border: 1px solid ${color}; border-radius: 8px; padding: 20px; margin-top: 25px; margin-bottom: 25px;">
                         ${when ? `<div style="margin-bottom: 8px;"><strong><span style="color: ${color};">WHEN</span></strong> ${when}</div>` : ''}
                         ${where ? `<div><strong><span style="color: ${color};">WHERE</span></strong> ${where}</div>` : ''}
@@ -255,6 +258,25 @@ let featureboxHtml = (s1Title || s2Title || s3Title) ? `<div style="margin-top: 
                         <div style="color: ${color}; font-weight: bold; font-size: 1.1rem; margin-bottom: 5px;">${f[0]}</div>
                         <div style="color: #2E3338; font-size: 0.95rem;">${f[1]}</div>
                     </div>` : '').join('') + `</div>` : '';
+
+
+let buttonHtml = (butText) ? `
+    <div style="text-align: center; margin-top: 35px; margin-bottom: 35px;">
+        <a href="${butLink || '#'}"
+           style="
+            display: inline-block;
+            background: #0c1b47;
+            color: #ffffff;
+            padding: 14px 36px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+           ">
+            ${butText}
+        </a>
+    </div>
+    `
+  : '';
 
                 
                let FAQHtml =
@@ -275,9 +297,12 @@ let featureboxHtml = (s1Title || s2Title || s3Title) ? `<div style="margin-top: 
     .filter(f => f[0])
     .map(f => `
         <div style="border-bottom: 1px solid #e2e8f0; padding: 12px 0;">
-            <div style="color: #2E3338; font-weight: 550; margin-bottom: 4px;">
+            <div style="color: #2E3338; font-weight: bold; margin-bottom: 4px;">
                 ${f[0]}
             </div>
+
+
+
             <div style="color: #2E3338;">
                 ${f[1] || ''}
             </div>
@@ -299,11 +324,12 @@ let featureboxHtml = (s1Title || s2Title || s3Title) ? `<div style="margin-top: 
 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border: 1px solid #e2e8f0; border-radius: 12px; padding: 30px; max-width: 800px; background: #ffffff;">
     <div style="border-left: 8px solid ${color}; padding-left: 15px; margin-bottom: 20px;">
         <h1 style="color: ${color}; font-size: 2.5rem; margin: 0; line-height: 1.1;">${title}</h1>
-        ${taglineHtml}
+        
     </div>
     ${detailsHtml}
     <div style="color: #2E3338; line-height: 1.6;">${desc}</div>
     ${featureboxHtml}
+${buttonHtml}
 ${FAQHtml}
   
     ${tipHtml}
@@ -318,7 +344,7 @@ ${FAQHtml}
             const codeBox = document.getElementById('code-output');
             codeBox.select();
             document.execCommand('copy');
-            alert('HTML Code copied! You can now paste this into TargetConnect.');
+            alert('HTML Code copied! You can now paste this into targetconnect.');
         }
 
         generateTemplate();
