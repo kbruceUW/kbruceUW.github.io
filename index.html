@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,16 +91,17 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      cursor: pointer;
+
+      /* Important: no transform transition */
       transition:
         box-shadow 0.25s ease,
-        transform 0.25s ease;
-      cursor: pointer;
+        filter 0.25s ease;
     }
 
-    /* Subtle lift (no glow, no movement) */
+    /* ---- Diffuse glow on hover (no size or spacing change) ---- */
     .card-link:hover .card {
-      transform: scale(1.01);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.5));
     }
 
     .card h3 {
@@ -154,7 +154,6 @@
   </header>
 
   <main>
-    <!-- 2x2 grid -->
     <div class="card-grid">
       <a class="card-link" href="https://kbruceuw.github.io/event.html">
         <div class="card">
@@ -164,11 +163,8 @@
           </p>
         </div>
       </a>
-
-
     </div>
 
-    <!-- Full-width compact contact card -->
     <a class="card-link" href="mailto:k.bruce@worc.ac.uk">
       <div class="card card--compact">
         <h3>Have a question about these tools?</h3>
